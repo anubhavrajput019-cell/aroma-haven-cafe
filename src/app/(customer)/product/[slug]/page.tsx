@@ -164,7 +164,7 @@ export default function ProductDetailPage() {
                 <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-black/60 border border-border-subtle text-caption font-mono text-amber-400">
                   <Star className="w-3.5 h-3.5 fill-amber-400" />
                   <span>{product.avg_rating.toFixed(1)}</span>
-                  <span className="text-content-tertiary">({product.review_count} reviews)</span>
+                  <span className="text-content-tertiary">({product.review_count} demo ratings)</span>
                 </span>
                 <span className="text-caption font-mono text-brand-copper uppercase tracking-wider">
                   {category?.name}

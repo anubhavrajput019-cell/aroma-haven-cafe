@@ -37,14 +37,14 @@ export function ReviewsSection() {
       <div className="section-container space-y-12 text-left">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-3">
-            <span className="text-caption font-mono uppercase tracking-widest text-brand-copper">
-              Guest Impressions
-            </span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-copper/10 border border-brand-copper/30 text-brand-copper font-mono text-xs uppercase tracking-widest">
+              <span>Academic Prototype • Concept Showcase</span>
+            </div>
             <h2 className="text-display-sm sm:text-display-md font-display text-content-primary">
-              Loved By Coffee Connoisseurs
+              Guest Impressions &amp; Experience Scenarios
             </h2>
             <p className="text-body-md text-content-secondary max-w-lg">
-              Hear what our patrons and night owls in Motihari have to say about their Aroma Haven experience.
+              Illustrative customer feedback scenarios created for the academic evaluation and experiential design of Aroma Haven Café.
             </p>
           </div>
 
@@ -58,7 +58,7 @@ export function ReviewsSection() {
                   <Star key={i} className="w-4 h-4 fill-amber-400" />
                 ))}
               </div>
-              <span className="text-[12px] text-content-tertiary">Over 450+ Verified Ratings</span>
+              <span className="text-[12px] text-content-tertiary">Simulated Feedback Metrics</span>
             </div>
           </div>
         </div>
@@ -88,7 +88,7 @@ export function ReviewsSection() {
                 <div>
                   <div className="font-semibold text-content-primary flex items-center gap-1.5">
                     <span>{rev.author}</span>
-                    <CheckCircle className="w-3.5 h-3.5 text-status-success" aria-label="Verified Customer" />
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-surface-tertiary border border-border-subtle text-content-tertiary font-mono">Demo</span>
                   </div>
                   <div className="text-[12px] text-content-tertiary">{rev.city} • {rev.date}</div>
                 </div>

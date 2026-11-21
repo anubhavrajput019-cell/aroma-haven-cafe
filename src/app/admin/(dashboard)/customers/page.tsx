@@ -16,13 +16,18 @@ export default function AdminCustomersPage() {
 
   return (
     <div className="space-y-8 text-left">
-      <div className="border-b border-border-subtle pb-6">
-        <h1 className="text-heading-lg font-display font-bold text-content-primary">
-          Customer Accounts &amp; Loyalty Roster
-        </h1>
-        <p className="text-body-sm text-content-secondary mt-0.5">
-          Registered patrons, loyalty tier progressions, and spending history in Motihari.
-        </p>
+      <div className="border-b border-border-subtle pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-heading-lg font-display font-bold text-content-primary">
+            Customer Accounts &amp; Loyalty Roster
+          </h1>
+          <p className="text-body-sm text-content-secondary mt-0.5">
+            Registered patrons, loyalty tier progressions, and spending history in Motihari.
+          </p>
+        </div>
+        <span className="px-3 py-1 rounded-full bg-status-warning-soft border border-status-warning/30 text-status-warning text-xs font-mono shrink-0">
+          Academic Demo Data • No Real PII
+        </span>
       </div>
 
       <div className="rounded-2xl bg-surface-secondary border border-border-subtle overflow-hidden shadow-card">

@@ -1,7 +1,7 @@
 # Aroma Haven Café — Academic AI Collaboration Log
 
 **Project**: Aroma Haven Café — Ultra-Premium Digital Product & Experience  
-**Student/Owner**: Anubhav Rajput  
+**Team Members**- Anubhav,Dhanvin,Saksham,Spandan,Abhijay. 
 **Academic Context**: CS-1 Working Digital Artifact  
 **Repository**: `aroma-haven-cafe`  
 **Initial Platform Target**: Render  

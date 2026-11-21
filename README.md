@@ -1,4 +1,12 @@
-# Aroma Haven Café
+# Aroma Haven Café                                                                                ## 🌐 Live Website
+
+**Aroma Haven Café — AI-Powered Multi-Page Café Website**
+
+**Visit our live website:** https://aroma-haven-cafe-sy5c.onrender.com/
+
+This project was developed as part of the AI Foundations and Ethics PBL assignment.
+
+The repository contains the website source code, project team information, AI collaboration log, university reflection, and supporting testing evidence.
 
 **Served With Love & Quality !!**
 

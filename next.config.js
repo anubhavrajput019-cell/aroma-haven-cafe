@@ -1,3 +1,14 @@
+// Guard against Node.js 22+ ExperimentalWarning for globalThis.localStorage
+if (typeof window === 'undefined' && typeof globalThis !== 'undefined') {
+  try {
+    Object.defineProperty(globalThis, 'localStorage', {
+      value: undefined,
+      configurable: true,
+      writable: true,
+    });
+  } catch {}
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // ── Images ──────────────────────────────────────────────────

@@ -311,3 +311,52 @@
   - Admin: `/admin/login`, `/admin/dashboard`, `/admin/orders`, `/admin/menu`, `/admin/availability`, `/admin/analytics`, `/admin/coupons`, `/admin/messages`, `/admin/customers`, `/admin/reviews`, `/admin/settings`, `/admin/audit`
   - APIs: `/api/menu`, `/api/orders`, `/api/coupons`, `/api/contact`
   - SEO: `/robots.txt`, `/sitemap.xml`
+
+
+---
+
+## 13. Post-Phase Bug Investigation, Root Cause Analysis & Rectification Log
+
+### 13.1 Issue 10: Unsplash Image HTTP 404 Errors (Confirmed Genuine AI Issue)
+- **Reported Symptom**: During local testing, multiple Unsplash image requests failed with HTTP 404 Not Found.
+- **Investigation & Audit**:
+  - Authored automated network verification script `scripts/check_images.mjs` scanning all 28 unique Unsplash CDN image URLs across the repository (`src/`).
+  - Audit identified that 26 URLs were active (200 OK), but 2 specific photo IDs returned HTTP 404:
+    1. `https://images.unsplash.com/photo-1621996346565-e3d5d6281729?auto=format&fit=crop&w=800&q=80` (used for `cat-pasta` and `prod-truffle-alfredo-fettuccine`).
+    2. `https://images.unsplash.com/photo-1578314670553-5d3c8c767e72?auto=format&fit=crop&w=800&q=80` (used for `prod-mocha-valrhona`).
+- **Root Cause**: Genuine AI hallucination during mock menu data assembly; the photo ID parameters were invalid or retired on Unsplash's CDN.
+- **Corrections Applied**:
+  - Replaced `cat-pasta` with `https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=80` (Verified 200 OK Italian Pasta dish).
+  - Replaced `prod-truffle-alfredo-fettuccine` with `https://images.unsplash.com/photo-1546549032-9571cd6b27df?auto=format&fit=crop&w=800&q=80` (Verified 200 OK Creamy Fettuccine).
+  - Replaced `prod-mocha-valrhona` with `https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80` (Verified 200 OK Dark Chocolate Mocha).
+- **Verification Evidence**:
+  - Re-ran network audit across all 29 URLs in `src/`: 29/29 passed (100% HTTP 200 OK).
+  - Automated visual browser inspection verified that `/product/valrhona-dark-chocolate-mocha` and `/product/creamy-truffle-mushroom-fettuccine` load high-resolution hero images cleanly with zero broken placeholders.
+  - Evidence archived in `docs/academic/evidence/IMAGE_AUDIT_BEFORE.md`, `IMAGE_AUDIT_AFTER.md`, and `product_page_verified.png`.
+
+### 13.2 Issue 11: Node.js `localStorage` Experimental Warning
+- **Reported Symptom**: Next.js compilation and runtime emitted repeated warnings: `ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.`
+- **Investigation & Stack Trace**:
+  - Traced warning with `node --trace-warnings ./node_modules/next/dist/bin/next build`.
+  - Stack trace pinpointed access at `Object.get (node:internal/webstorage:42:21)` triggered during Zustand's `persist` middleware module initialization in `.next/server/chunks/404.js`.
+- **Root Cause**:
+  1. Node.js `v26.13.1` (and Node 22+) includes an experimental server-side implementation of WHATWG `localStorage` on `globalThis`. Accessing it without `--localstorage-file` emits an `ExperimentalWarning` to stderr.
+  2. Zustand's internal `persist` middleware defines default options `{ storage: createJSONStorage(() => localStorage), ...baseOptions }`. In JavaScript object literals, default values evaluate before object spread overrides take effect. Even though our custom stores pass SSR-safe storage, the default expression accessed `() => localStorage`, triggering Node's experimental getter during static page prerendering.
+  3. **Functionality Impact**: Did not affect client browser functionality (where `window.localStorage` is standard), but polluted server logs.
+- **Corrections Applied**:
+  - Implemented a server-side guard in `src/lib/constants/index.ts` and `next.config.js`:
+    ```typescript
+    if (typeof window === 'undefined' && typeof globalThis !== 'undefined') {
+      try {
+        Object.defineProperty(globalThis, 'localStorage', {
+          value: undefined,
+          configurable: true,
+          writable: true,
+        });
+      } catch {}
+    }
+    ```
+- **Verification Evidence**:
+  - Clean `next build` executed with exit code 0.
+  - Zero `ExperimentalWarning: localStorage` warnings emitted.
+  - All 31 static and dynamic pages generated with pristine build outputs.

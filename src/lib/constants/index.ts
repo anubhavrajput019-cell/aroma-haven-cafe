@@ -2,6 +2,19 @@
 // AROMA HAVEN CAFÉ — Application Constants
 // ============================================================
 
+// Server-side guard to prevent Node.js 22+ ExperimentalWarning on globalThis.localStorage
+if (typeof window === 'undefined' && typeof globalThis !== 'undefined') {
+  try {
+    Object.defineProperty(globalThis, 'localStorage', {
+      value: undefined,
+      configurable: true,
+      writable: true,
+    });
+  } catch {
+    // Ignore if not configurable
+  }
+}
+
 // ── Brand ───────────────────────────────────────────────────
 
 export const BRAND = {

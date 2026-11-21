@@ -1,0 +1,278 @@
+/* ============================================================
+   AROMA HAVEN CAFÉ — Global Styles
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base Layer ───────────────────────────────────────────── */
+
+@layer base {
+  :root {
+    /* Brand typography variables */
+    --font-playfair: 'Playfair Display', Georgia, serif;
+    --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+    --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-jetbrains: 'JetBrains Mono', monospace;
+
+    /* Brand tokens available as CSS custom properties */
+    --color-espresso: #2C1810;
+    --color-black: #1A1110;
+    --color-black-soft: #2A201F;
+    --color-cream: #F5EDE4;
+    --color-cream-soft: #FAF5EF;
+    --color-copper: #B87333;
+    --color-copper-muted: rgba(184, 115, 51, 0.6);
+
+    /* Surface */
+    --surface-primary: #1A1110;
+    --surface-secondary: #2A201F;
+    --surface-tertiary: #3A2F2D;
+
+    /* Transition defaults */
+    --transition-base: 250ms cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-slow: 600ms cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-cinematic: 800ms cubic-bezier(0.76, 0, 0.24, 1);
+  }
+
+  /* Smooth scrolling with reduced-motion respect */
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    @apply bg-surface-primary text-content-primary;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+    overflow-x: hidden;
+  }
+
+  /* Selection */
+  ::selection {
+    background: rgba(184, 115, 51, 0.3);
+    color: #F5EDE4;
+  }
+
+  /* Focus visible */
+  :focus-visible {
+    outline: 2px solid var(--color-copper);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Scrollbar — dark premium */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--surface-primary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-copper-muted);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-copper);
+  }
+
+  /* Headings */
+  h1, h2, h3 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+
+  h4, h5, h6 {
+    @apply font-heading;
+    text-wrap: balance;
+  }
+
+  /* Links */
+  a {
+    @apply transition-colors duration-250;
+  }
+}
+
+/* ── Component Layer ──────────────────────────────────────── */
+
+@layer components {
+  /* Premium button base */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+           px-6 py-3 rounded-lg
+           bg-brand-copper text-white
+           font-body font-medium text-body-md
+           transition-all duration-350 ease-luxury
+           hover:bg-brand-copper-500 hover:shadow-glow-copper
+           focus-visible:ring-2 focus-visible:ring-brand-copper focus-visible:ring-offset-2 focus-visible:ring-offset-surface-primary
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2
+           px-6 py-3 rounded-lg
+           bg-transparent text-content-primary
+           border border-border
+           font-body font-medium text-body-md
+           transition-all duration-350 ease-luxury
+           hover:border-brand-copper hover:text-brand-copper
+           focus-visible:ring-2 focus-visible:ring-brand-copper focus-visible:ring-offset-2 focus-visible:ring-offset-surface-primary
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2
+           px-4 py-2 rounded-lg
+           bg-transparent text-content-secondary
+           font-body font-medium text-body-md
+           transition-all duration-250 ease-luxury
+           hover:bg-surface-secondary hover:text-content-primary
+           focus-visible:ring-2 focus-visible:ring-brand-copper focus-visible:ring-offset-2 focus-visible:ring-offset-surface-primary;
+  }
+
+  /* Card surfaces */
+  .card-surface {
+    @apply bg-surface-secondary rounded-xl border border-border-subtle
+           shadow-card transition-all duration-350 ease-luxury;
+  }
+
+  .card-surface-hover {
+    @apply card-surface hover:shadow-card-hover hover:border-border;
+  }
+
+  /* Section container */
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Page section spacing */
+  .section-spacing {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  /* Premium input */
+  .input-field {
+    @apply w-full px-4 py-3 rounded-lg
+           bg-surface-secondary border border-border-subtle
+           text-content-primary placeholder:text-content-tertiary
+           font-body text-body-md
+           transition-all duration-250 ease-luxury
+           focus:border-brand-copper focus:ring-1 focus:ring-brand-copper focus:outline-none
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full
+           text-caption font-medium;
+  }
+
+  .badge-copper {
+    @apply badge bg-brand-copper/15 text-brand-copper;
+  }
+
+  .badge-success {
+    @apply badge bg-status-success-soft text-status-success;
+  }
+
+  .badge-warning {
+    @apply badge bg-status-warning-soft text-status-warning;
+  }
+
+  .badge-error {
+    @apply badge bg-status-error-soft text-status-error;
+  }
+
+  /* Demo indicator */
+  .demo-badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded
+           bg-status-warning-soft text-status-warning
+           text-caption font-medium;
+  }
+
+  /* Skeleton loader */
+  .skeleton {
+    @apply animate-pulse rounded-lg bg-surface-tertiary;
+  }
+
+  /* Overlay backdrop */
+  .overlay-backdrop {
+    @apply fixed inset-0 bg-black/60 backdrop-blur-sm z-modal-backdrop;
+  }
+}
+
+/* ── Utility Layer ────────────────────────────────────────── */
+
+@layer utilities {
+  /* Text gradient */
+  .text-gradient-copper {
+    @apply bg-gradient-to-r from-brand-copper-300 via-brand-copper to-brand-copper-300
+           bg-clip-text text-transparent;
+  }
+
+  /* Glow effects */
+  .glow-copper-sm {
+    box-shadow: 0 0 10px rgba(184, 115, 51, 0.1);
+  }
+
+  .glow-copper-md {
+    box-shadow: 0 0 20px rgba(184, 115, 51, 0.15);
+  }
+
+  /* Hide scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Aspect ratios */
+  .aspect-product {
+    aspect-ratio: 4/5;
+  }
+
+  .aspect-hero {
+    aspect-ratio: 16/9;
+  }
+
+  /* Line clamp */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

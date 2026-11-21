@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: aroma-haven-cafe
+    env: node
+    plan: free
+    region: singapore
+    buildCommand: pnpm install && pnpm build
+    startCommand: pnpm start
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 20.11.1
+      - key: NEXT_PUBLIC_SITE_URL
+        value: https://aroma-haven-cafe.onrender.com
+      - key: NEXT_PUBLIC_CAFE_NAME
+        value: "Aroma Haven Café"
+      - key: NEXT_PUBLIC_CAFE_TAGLINE
+        value: "Served With Love & Quality !!"
+      - key: NEXT_PUBLIC_CAFE_PHONE
+        value: "+91 9229310610"
+      - key: NEXT_PUBLIC_CAFE_CITY
+        value: "Motihari"
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        sync: false
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false

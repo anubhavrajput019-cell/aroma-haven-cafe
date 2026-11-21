@@ -2,7 +2,16 @@
 
 **Served With Love & Quality !!**
 
-A premium full-stack digital experience for Aroma Haven Café — featuring a cinematic 3D brand website, complete ordering platform, customer accounts with loyalty rewards, and a professional admin SaaS dashboard.
+A premium full-stack digital experience for Aroma Haven Café — featuring a cinematic 3D brand website, complete ordering platform, customer accounts with loyalty rewards, and a professional admin SaaS dashboard.                                                                                                                                                                               
+## 👥 Project Team & Contributors
+
+| Team Member | SAP ID | Project Responsibility |
+|---|---|---|
+| Anubhav Kashyap | 590032897 | Project Lead & AI Development Coordinator |
+| Spandan Poddar | 590030170 | AI Prompt Engineering & Research |
+| Abhijay Rishi | 590031629 | UI/UX Design & Visual Experience |
+| Dhanvin Panchaity | 590040733 | Website Testing & Quality Assurance |
+| Saksham Saini | 590030218 | Documentation & Deployment Coordinator |
 
 ---
 

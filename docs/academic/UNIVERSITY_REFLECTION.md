@@ -1,7 +1,7 @@
 # Academic Reflection & University Capstone Defense
 ## Aroma Haven Café: Architectural Design, Human-AI Collaboration & Engineering Rigor
 
-**Student & Founder**: Anubhav Rajput  
+**Student & Founder**: Anubhav  
 **Project**: Aroma Haven Café — Ultra-Premium Full-Stack Digital Product  
 **Academic Context**: CS-1 Working Digital Artifact  
 **Repository**: `anubhavrajput019-cell/aroma-haven-cafe`  

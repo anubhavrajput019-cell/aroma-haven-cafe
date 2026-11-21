@@ -1,5 +1,5 @@
 # Aroma Haven Café — Owner Executive Showcase Summary
-## "Served With Love & Quality !!" — Motihari, Bihar (24×7 Operations)
+## "Served With Love & Quality !!" — Motihari, (24×7 Operations)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
